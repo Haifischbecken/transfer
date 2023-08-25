@@ -1,0 +1,313 @@
+{
+    "annotations": {
+        "list": [
+            {
+                "builtIn": 1,
+                "datasource": {
+                    "type": "grafana",
+                    "uid": "-- Grafana --"
+                },
+                "enable": true,
+                "hide": true,
+                "iconColor": "rgba(0, 211, 255, 1)",
+                "name": "Annotations & Alerts",
+                "type": "dashboard"
+            }
+        ]
+    },
+    "editable": true,
+    "fiscalYearStartMonth": 0,
+    "graphTooltip": 0,
+    "links": [],
+    "liveNow": false,
+    "panels": [
+        {
+            "datasource": {
+                "type": "influxdb",
+                "uid": "P70ABEB8D6033372E"
+            },
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "palette-classic"
+                    },
+                    "custom": {
+                        "axisCenteredZero": false,
+                        "axisColorMode": "text",
+                        "axisLabel": "Voltage",
+                        "axisPlacement": "auto",
+                        "barAlignment": 0,
+                        "drawStyle": "line",
+                        "fillOpacity": 0,
+                        "gradientMode": "none",
+                        "hideFrom": {
+                            "legend": false,
+                            "tooltip": false,
+                            "viz": false
+                        },
+                        "lineInterpolation": "linear",
+                        "lineWidth": 1,
+                        "pointSize": 7,
+                        "scaleDistribution": {
+                            "type": "linear"
+                        },
+                        "showPoints": "auto",
+                        "spanNulls": false,
+                        "stacking": {
+                            "group": "A",
+                            "mode": "none"
+                        },
+                        "thresholdsStyle": {
+                            "mode": "off"
+                        }
+                    },
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green",
+                                "value": null
+                            },
+                            {
+                                "color": "red",
+                                "value": 80
+                            }
+                        ]
+                    },
+                    "unit": "pu"
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 8,
+                "w": 12,
+                "x": 0,
+                "y": 0
+            },
+            "id": 1,
+            "options": {
+                "legend": {
+                    "calcs": [],
+                    "displayMode": "list",
+                    "placement": "bottom",
+                    "showLegend": true
+                },
+                "tooltip": {
+                    "mode": "single",
+                    "sort": "none"
+                }
+            },
+            "targets": [
+                {
+                    "alias": "Bus $tag_tags_bus",
+                    "datasource": {
+                        "type": "influxdb",
+                        "uid": "P70ABEB8D6033372E"
+                    },
+                    "groupBy": [
+                        {
+                            "params": [
+                                "fields_generation_q::field"
+                            ],
+                            "type": "tag"
+                        }
+                    ],
+                    "measurement": "bus_data",
+                    "orderByTime": "ASC",
+                    "policy": "autogen",
+                    "query": "SELECT \"fields_voltage_magnitude\" FROM \"autogen\".\"voltage\" WHERE (\"tags_bus\"::tag =~ /^$bus$/) AND $timeFilter GROUP BY \"tags_bus\"::tag",
+                    "rawQuery": true,
+                    "refId": "A",
+                    "resultFormat": "time_series",
+                    "select": [
+                        [
+                            {
+                                "params": [
+                                    "fields_voltage_magnitude"
+                                ],
+                                "type": "field"
+                            }
+                        ]
+                    ],
+                    "tags": [
+                        {
+                            "key": "tags_bus::tag",
+                            "operator": "=~",
+                            "value": "/^$tags_bus$/"
+                        }
+                    ]
+                }
+            ],
+            "title": "Bus Voltage Magnitude",
+            "type": "timeseries"
+        },
+        {
+            "datasource": {
+                "type": "influxdb",
+                "uid": "P70ABEB8D6033372E"
+            },
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "palette-classic"
+                    },
+                    "custom": {
+                        "axisCenteredZero": false,
+                        "axisColorMode": "text",
+                        "axisLabel": "Angle",
+                        "axisPlacement": "auto",
+                        "barAlignment": 0,
+                        "drawStyle": "line",
+                        "fillOpacity": 0,
+                        "gradientMode": "none",
+                        "hideFrom": {
+                            "legend": false,
+                            "tooltip": false,
+                            "viz": false
+                        },
+                        "lineInterpolation": "linear",
+                        "lineWidth": 1,
+                        "pointSize": 7,
+                        "scaleDistribution": {
+                            "type": "linear"
+                        },
+                        "showPoints": "auto",
+                        "spanNulls": false,
+                        "stacking": {
+                            "group": "A",
+                            "mode": "none"
+                        },
+                        "thresholdsStyle": {
+                            "mode": "off"
+                        }
+                    },
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green",
+                                "value": null
+                            },
+                            {
+                                "color": "red",
+                                "value": 80
+                            }
+                        ]
+                    },
+                    "unit": "degree"
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 8,
+                "w": 12,
+                "x": 12,
+                "y": 0
+            },
+            "id": 2,
+            "options": {
+                "legend": {
+                    "calcs": [],
+                    "displayMode": "list",
+                    "placement": "bottom",
+                    "showLegend": true
+                },
+                "tooltip": {
+                    "mode": "single",
+                    "sort": "none"
+                }
+            },
+            "targets": [
+                {
+                    "alias": "Bus $tag_tags_bus",
+                    "datasource": {
+                        "type": "influxdb",
+                        "uid": "P70ABEB8D6033372E"
+                    },
+                    "groupBy": [
+                        {
+                            "params": [
+                                "fields_generation_q::field"
+                            ],
+                            "type": "tag"
+                        }
+                    ],
+                    "measurement": "bus_data",
+                    "orderByTime": "ASC",
+                    "policy": "autogen",
+                    "query": "SELECT \"fields_voltage_angle\" FROM \"autogen\".\"voltage\" WHERE (\"tags_bus\"::tag =~ /^$bus$/) AND $timeFilter GROUP BY \"tags_bus\"::tag",
+                    "rawQuery": true,
+                    "refId": "A",
+                    "resultFormat": "time_series",
+                    "select": [
+                        [
+                            {
+                                "params": [
+                                    "fields_voltage_magnitude"
+                                ],
+                                "type": "field"
+                            }
+                        ]
+                    ],
+                    "tags": [
+                        {
+                            "key": "tags_bus::tag",
+                            "operator": "=~",
+                            "value": "/^$tags_bus$/"
+                        }
+                    ]
+                }
+            ],
+            "title": "Bus Voltage Angle",
+            "type": "timeseries"
+        }
+    ],
+    "refresh": "",
+    "schemaVersion": 38,
+    "style": "dark",
+    "tags": [],
+    "templating": {
+        "list": [
+            {
+                "current": {
+                    "selected": true,
+                    "text": [
+                        "102"
+                    ],
+                    "value": [
+                        "102"
+                    ]
+                },
+                "datasource": {
+                    "type": "influxdb",
+                    "uid": "P70ABEB8D6033372E"
+                },
+                "definition": "show tag values from \"voltage\" with key=\"tags_bus\"",
+                "hide": 0,
+                "includeAll": true,
+                "label": "Bus",
+                "multi": true,
+                "name": "bus",
+                "options": [],
+                "query": "show tag values from \"voltage\" with key=\"tags_bus\"",
+                "refresh": 1,
+                "regex": "",
+                "skipUrlSync": false,
+                "sort": 0,
+                "type": "query"
+            }
+        ]
+    },
+    "time": {
+        "from": "now-6h",
+        "to": "now"
+    },
+    "timepicker": {},
+    "timezone": "",
+    "title": "Voltage",
+    "uid": "c97b8eaf-db4f-4680-941d-8844d3a9783c",
+    "version": 1,
+    "weekStart": ""
+}

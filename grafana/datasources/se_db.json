@@ -1,0 +1,19 @@
+[
+    {
+        "name": "SEdatabase",
+        "type": "influxdb",
+        "typeName": "InfluxDB",
+        "typeLogoUrl": "public/app/plugins/datasource/influxdb/img/influxdb_logo.svg",
+        "access": "proxy",
+        "url": "http://influxdb:8086",
+        "user": "",
+        "database": "",
+        "basicAuth": false,
+        "isDefault": true,
+        "jsonData": {
+            "dbName": "platone",
+            "httpMode": "POST"
+        },
+        "readOnly": false
+    }
+]
