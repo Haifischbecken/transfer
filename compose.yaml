@@ -1,0 +1,47 @@
+services:
+  mqtt-broker:
+    image: eclipse-mosquitto
+    ports:
+      - 1883:1883
+    volumes:
+      - ./mosquitto.conf:/mosquitto/config/mosquitto.conf
+  influxdb:
+    image: influxdb:1.8-alpine
+    ports:
+      - 8086:8086
+    volumes:
+      - influxVolume:/var/lib/influxdb
+    environment:
+      - INFLUXDB_HTTP_FLUX_ENABLED=true
+  grafana:
+    image: grafana/grafana:latest
+    ports: 
+      - 3002:3000
+    environment:
+      - GRAFANA_USER=admin # TODO
+      - GRAFANA_PASSWORD=admin
+      - GRAFANA_PORT=3000
+      - GF_SECURITY_ALLOW_EMBEDDING=true
+    volumes:
+      - ./grafana/datasources:/etc/grafana/provisioning/datasources/
+      - ./grafana/dashboards:/etc/grafana/provisioning/dashboards/
+  telegraf:
+    image: telegraf:alpine
+    volumes:
+      - ./telegraf.conf:/etc/telegraf/telegraf.conf:ro
+  backend:
+    image: haifischbecken/platone-se-backend:latest
+    environment:
+      - MQTT_HOST_OUT=mqtt-broker
+      - MQTT_CLIENT_IN=compose-deployment
+  frontend:
+    image: haifischbecken/platone-se-frontend:latest
+    environment:
+      - DB_HOST=influxdb
+    ports:
+      - 3000:3000
+
+    
+volumes:
+  influxVolume:
+  
