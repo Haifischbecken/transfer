@@ -35,7 +35,7 @@ services:
       - MQTT_HOST_OUT=mqtt-broker
       - MQTT_CLIENT_IN=compose-deployment
   frontend:
-    image: haifischbecken/platone-se-frontend:latest
+    image: haifischbecken/platone-se-frontend:0.1.2
     environment:
       - GRAFANA_HOST=10.13.55.254
       - GRAFANA_PORT=3002
