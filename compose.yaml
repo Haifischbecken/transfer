@@ -7,8 +7,8 @@ services:
       - ./mosquitto.conf:/mosquitto/config/mosquitto.conf
   influxdb:
     image: influxdb:1.8-alpine
-    ports:
-      - 8086:8086
+    # ports:
+    #   - 8086:8086
     volumes:
       - influxVolume:/var/lib/influxdb
     environment:
@@ -37,9 +37,11 @@ services:
   frontend:
     image: haifischbecken/platone-se-frontend:latest
     environment:
+      - GRAFANA_HOST=10.13.55.254
+      - GRAFANA_PORT=3002
       - DB_HOST=influxdb
     ports:
-      - 3000:3000
+      - 8080:3000
 
     
 volumes:
