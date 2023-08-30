@@ -33,7 +33,7 @@ services:
     image: haifischbecken/platone-se-backend:latest
     environment:
       - MQTT_HOST_OUT=mqtt-broker
-      - MQTT_CLIENT_IN=compose-deployment
+      - MQTT_CLIENT_IN=hedno-deployment
   frontend:
     image: haifischbecken/platone-se-frontend:0.1.2
     environment:
