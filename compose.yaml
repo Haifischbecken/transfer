@@ -30,7 +30,7 @@ services:
     volumes:
       - ./telegraf.conf:/etc/telegraf/telegraf.conf:ro
   backend:
-    image: haifischbecken/platone-se-backend:latest
+    image: haifischbecken/platone-se-backend:0.2.2
     environment:
       - MQTT_HOST_OUT=mqtt-broker
       - MQTT_CLIENT_IN=hedno-deployment
