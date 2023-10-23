@@ -30,12 +30,12 @@ services:
     volumes:
       - ./telegraf.conf:/etc/telegraf/telegraf.conf:ro
   backend:
-    image: haifischbecken/platone-se-backend:0.2.2
+    image: haifischbecken/platone-se-backend:0.2.3
     environment:
       - MQTT_HOST_OUT=mqtt-broker
       - MQTT_CLIENT_IN=hedno-deployment
   frontend:
-    image: haifischbecken/platone-se-frontend:0.1.2
+    image: haifischbecken/platone-se-frontend:0.1.3
     environment:
       - GRAFANA_HOST=10.13.55.254
       - GRAFANA_PORT=3002
